@@ -175,12 +175,13 @@ The outliers in the box plot suggest the presence of individuals who are much ol
 """
 
 # Ploting histograms for the 'Age' variable
-st.write("#### Distribution of Age for Women who do not have Diabetes")
-histogram_no_diabetes = sns.histplot(pima[pima['Outcome'] == 0]['Age'], bins=5)
-histogram_no_diabetes.set_title('Distribution of Age for Women who do not have Diabetes')
-histogram_no_diabetes.set_xlabel('Age')
-histogram_no_diabetes.set_ylabel('Frequency')
-st.pyplot()
+no_diabetes_df = pima[pima['Outcome'] == 0]
+fig, ax = plt.subplots()
+sns.histplot(data=no_diabetes_df, x='Age', bins=5, ax=ax)
+ax.set_title('Distribution of Age for Women who do not have Diabetes')
+ax.set_xlabel('Age')
+ax.set_ylabel('Frequency')
+st.pyplot(fig)
 
 """
 #### Observations:
@@ -190,12 +191,13 @@ In the first histogram, we can see that the majority of women who do not have di
 """
 
 # Ploting histograms for the 'Age' variable
-st.write("#### Distribution of Age for Women who have Diabetes")
-histogram_diabetes = sns.histplot(pima[pima['Outcome'] == 1]['Age'], bins=5)
-histogram_diabetes.set_title('Distribution of Age for Women who have Diabetes')
-histogram_diabetes.set_xlabel('Age')
-histogram_diabetes.set_ylabel('Frequency')
-st.pyplot()
+fig, ax = plt.subplots()
+ax.hist(pima[pima['Outcome'] == 1]['Age'], bins=5)
+ax.set_title('Distribution of Age for Women who have Diabetes')
+ax.set_xlabel('Age')
+ax.set_ylabel('Frequency')
+st.pyplot(fig)
+
 
 """
 #### Observations:
@@ -213,12 +215,15 @@ IQR = Q3 - Q1
 st.write("#### Interquartile Range (IQR)")
 st.write(IQR)
 
-# Create a box plot to visualize the IQR
 st.write("#### Boxplot of Variables")
-plt.figure(figsize=(12, 6))
-sns.boxplot(data=pima)
+fig, ax = plt.subplots(figsize=(12, 6))
+sns.boxplot(data=pima, ax=ax)
 plt.xticks(rotation=45, ha='right')
-st.pyplot()
+
+# Display the plot using st.pyplot()
+st.pyplot(fig)
+
+
 
 """
 The provided code calculates the Interquartile Range (IQR) for each variable in the dataset pima. The IQR is a measure of variability that represents the spread of the middle 50% of the data. It is computed by finding the difference between the third quartile (Q3) and the first quartile (Q1) of the dataset.
